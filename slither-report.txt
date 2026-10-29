@@ -1,0 +1,50 @@
+Multiple frameworks detected: solc, Solc-json. Using solc (highest priority). Use --compile-force-framework to override.
+'solc --version' running
+'solc contracts/SavingsVault.sol --combined-json abi,ast,bin,bin-runtime,srcmap,srcmap-runtime,userdoc,devdoc,hashes --allow-paths .,/mnt/c/Users/Dell/OneDrive/Desktop/SCS-LAB_unit4/contracts' running
+INFO:Detectors:
+Detector: reentrancy-eth
+Reentrancy in SavingsVault.withdrawAll() (contracts/SavingsVault.sol#26-36):
+	External calls:
+	- (ok,None) = msg.sender.call{value: amount - fee}() (contracts/SavingsVault.sol#31)
+	State variables written after the call(s):
+	- balances[msg.sender] = 0 (contracts/SavingsVault.sol#33)
+	SavingsVault.balances (contracts/SavingsVault.sol#11) can be used in cross function reentrancies:
+	- SavingsVault.balances (contracts/SavingsVault.sol#11)
+	- SavingsVault.deposit() (contracts/SavingsVault.sol#20-24)
+	- SavingsVault.withdrawAll() (contracts/SavingsVault.sol#26-36)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-1
+INFO:Detectors:
+Detector: tx-origin
+SavingsVault.setFee(uint256) (contracts/SavingsVault.sol#38-41) uses tx.origin for authorization: require(bool,string)(tx.origin == owner,not owner) (contracts/SavingsVault.sol#39)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#dangerous-usage-of-txorigin
+INFO:Detectors:
+Detector: missing-zero-check
+SavingsVault.claimFees(address).to (contracts/SavingsVault.sol#43) lacks a zero-check on :
+		- to.transfer(amount) (contracts/SavingsVault.sol#47)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#missing-zero-address-validation
+INFO:Detectors:
+Detector: reentrancy-benign
+Reentrancy in SavingsVault.withdrawAll() (contracts/SavingsVault.sol#26-36):
+	External calls:
+	- (ok,None) = msg.sender.call{value: amount - fee}() (contracts/SavingsVault.sol#31)
+	State variables written after the call(s):
+	- collectedFees += fee (contracts/SavingsVault.sol#34)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-3
+INFO:Detectors:
+Detector: reentrancy-events
+Reentrancy in SavingsVault.withdrawAll() (contracts/SavingsVault.sol#26-36):
+	External calls:
+	- (ok,None) = msg.sender.call{value: amount - fee}() (contracts/SavingsVault.sol#31)
+	Event emitted after the call(s):
+	- Withdrawn(msg.sender,amount,fee) (contracts/SavingsVault.sol#35)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#reentrancy-vulnerabilities-4
+INFO:Detectors:
+Detector: low-level-calls
+Low level call in SavingsVault.withdrawAll() (contracts/SavingsVault.sol#26-36):
+	- (ok,None) = msg.sender.call{value: amount - fee}() (contracts/SavingsVault.sol#31)
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#low-level-calls
+INFO:Detectors:
+Detector: immutable-states
+SavingsVault.owner (contracts/SavingsVault.sol#8) should be immutable 
+Reference: https://github.com/crytic/slither/wiki/Detector-Documentation#state-variables-that-could-be-declared-immutable
+INFO:Slither:contracts/SavingsVault.sol analyzed (1 contracts with 102 detectors), 7 result(s) found
