@@ -196,17 +196,15 @@ The file `audit-summary.md` contains a summary of the original findings, the cha
 
 The files `slither-report.txt` and `slither-fixed-report.txt` provide the corresponding static-analysis output.
 
-## Screenshots
+## Audit Documentation
 
-Add genuine screenshots from your own terminal or code editor to the `screenshots/` folder.
+- `manual-checklist.md` contains the manual security review checklist.
+- `audit-findings.md` documents the identified issues, impact, recommendations, and remediation status.
+- `audit-summary.md` summarizes the audit and testing results.
+- `slither-report.txt` contains the original contract's static-analysis report.
+- `slither-fixed-report.txt` contains the revised contract's static-analysis report.
 
-Recommended screenshots:
-
-1. **Test results:** Show the output of `npx hardhat test`, including the Solidity tests, the fuzz test's 256 runs, the TypeScript tests, and the final `18 passing` result.
-2. **Original Slither findings:** Show the original analysis output, including the detector categories and the seven-result summary.
-3. **Revised contract verification:** Show the six passing `SavingsVaultFixed` regression tests. If space permits, include the relevant revised-contract security protections in your editor.
-
-These screenshots provide visual evidence of the work completed. Ensure that terminal output and code are readable.
+No screenshots are included in this submission.
 
 ## Running the Project
 
